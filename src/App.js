@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import TransactionsList from './components/TransactionsList';
+import AddTransaction from './components/AddTransaction';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    handleTransactionAdded = () => {
+        this.transactionsListRef.fetchTransactions();
+    };
+
+    render() {
+        return (
+            <div className="min-h-screen bg-gray-100 p-4">
+                <h1 className="text-center text-4xl font-bold mb-8">Transactions App</h1>
+                <div className="max-w-6xl mx-auto">
+                    <AddTransaction onTransactionAdded={this.handleTransactionAdded} />
+                    <TransactionsList ref={ref => (this.transactionsListRef = ref)} />
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
